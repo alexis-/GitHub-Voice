@@ -1,0 +1,2 @@
+# Lint config files in the root ending .js
+!/*.js

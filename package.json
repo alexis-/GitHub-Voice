@@ -1,0 +1,68 @@
+{
+  "name": "githubvoice",
+  "version": "0.1.0",
+  "main": "src/server-main.js",
+  "description": "",
+  "author": "Alexis Incogito",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexis-/GitHubVoice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexis-/GitHubVoice/issues"
+  },
+  "homepage": "https://github.com/alexis-/GitHubVoice",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "watch": "vue-cli-service serve --watch",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "async": "^3.2.0",
+    "async-parallel-foreach": "^1.0.1",
+    "axios": "^0.21.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.19.0",
+    "config": "^3.3.2",
+    "connect-history-api-fallback": "^1.6.0",
+    "core-js": "^3.6.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "moment": "^2.29.1",
+    "node-cron": "^2.0.3",
+    "nouislider": "^14.6.3",
+    "passport": "^0.4.1",
+    "passport-github": "^1.1.0",
+    "session-file-store": "^1.5.0",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.2",
+    "vue-router": "^3.2.0",
+    "vue-types": "^2.0.2",
+    "vue2-transitions": "^0.3.0",
+    "vuex": "^3.4.0",
+    "vuex-types": "^1.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "typescript": "~3.9.3",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

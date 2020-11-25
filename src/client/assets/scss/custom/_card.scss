@@ -1,0 +1,30 @@
+.card {
+    position: relative;
+}
+
+// Card with blockquotes
+
+.card {
+    .card-blockquote {
+        padding: 2rem;
+        position: relative;
+
+        .svg-bg {
+            display: block;
+            width: 100%;
+            height: 95px;
+            position: absolute;
+            top: -94px;
+            left: 0;
+        }
+    }
+}
+
+// Animated cards
+
+.card-lift--hover {
+    &:hover {
+        transform: translateY(-20px);
+        @include transition($transition-base);
+    }
+}

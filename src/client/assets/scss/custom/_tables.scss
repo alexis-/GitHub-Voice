@@ -1,0 +1,10 @@
+//
+// Custom Bootstrap table
+//
+
+// stylelint-disable-next-line no-duplicate-selectors
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}

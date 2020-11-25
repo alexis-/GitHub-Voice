@@ -1,0 +1,28 @@
+{
+  server: {
+    port: 8080,
+
+    // Used for caching GitHub API responses
+    dataPath: "data/",
+
+    // Used to sign the session ID cookie, see https://www.npmjs.com/package/express-session#secret
+    sessionSecret: "Curiouser and curiouser",
+    
+    // GitHub authentication
+    gitHubClientId: "",
+    gitHubClientSecret: "",
+  },
+
+  client: {
+    // Defines the browser's and nav bar title
+    appTitle: "GitHub Voice",
+
+    // URL to this server's API
+    apiBaseUrl: "http://localhost:8080/"
+  },
+
+  // Which repositories' issues should be displayed to the client
+  repositories: [
+    { orgAndRepo: "alexis-/GitHubVoice-TestRepo", displayName: "GitHub Voice" },
+  ]
+}
