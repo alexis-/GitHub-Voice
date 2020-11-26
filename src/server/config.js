@@ -36,7 +36,7 @@ module.exports = {
     app.use('/', appRoute);
   },
   runTasks: () => {
-    const { dataPath } = path.resolve(global.cfg.server);
+    const dataPath = path.resolve(global.cfg.server.dataPath);
 
     if (!fs.existsSync(dataPath)) {
       fs.mkdirSync(dataPath);

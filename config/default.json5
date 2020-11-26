@@ -16,7 +16,7 @@
     dataPath: "./data/",
 
     // Used for storing user sessions
-    sessionPath: "./sessions/",
+    sessionsPath: "./sessions/",
 
     // Used to sign the session ID cookie
     // see: https://www.npmjs.com/package/express-session#secret
