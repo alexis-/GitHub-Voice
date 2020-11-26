@@ -1,7 +1,7 @@
+/* eslint-disable global-require */
 const path = require('path');
 
 require('./src/server-env-config')();
-const { configServer, runTasks } = require('./src/server/config');
 
 module.exports = {
   configureWebpack: {
@@ -15,9 +15,7 @@ module.exports = {
     },
   },
   devServer: {
-    before: (app) => {
-      configServer(app);
-    },
-    after: (_app, _server, _compiler) => runTasks(),
+    before: (app) => require('./src/server/config').configServer(app),
+    after: (_app, _server, _compiler) => require('./src/server/config').runTasks(),
   },
 };

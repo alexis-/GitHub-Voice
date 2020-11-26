@@ -1,0 +1,18 @@
+{
+  server: {
+    port: "GH_VOICE_SRV_PORT",
+    apiPath: "GH_VOICE_SRV_API_PATH",
+    serveStaticFiles: "GH_VOICE_SRV_SERVE_STATIC_FILES",
+    cors: "GH_VOICE_SRV_CORS",
+    dataPath: "GH_VOICE_SRV_DATA_PATH",
+    sessionsPath: "GH_VOICE_SRV_SESSIONS_PATH",
+    sessionSecret: "GH_VOICE_SRV_SESSION_SECRET",
+    gitHubClientId: "GH_VOICE_SRV_GITHUB_CLIENT_ID",
+    gitHubClientSecret: "GH_VOICE_SRV_GITHUB_CLIENT_SECRET",
+  },
+
+  client: {
+    title: "GH_VOICE_CLIENT_TITLE",
+    apiBaseUrl: "GH_VOICE_CLIENT_API_BASE_URL",
+  }
+}

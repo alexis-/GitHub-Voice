@@ -1,11 +1,25 @@
 {
   server: {
     port: 8080,
+    
+    // Url prefix path to the api. Use "/" if for hosting the api at the root level of a domain/subdomain
+    apiPath: "api/",
+
+    // Whether this node instance should serve both the API and the Vue client's static files (in dist/)
+    serveStaticFiles: true,
+
+    // false: No CORS, true: Allow all CORS, <url>: enable CORS on given host
+    // see: https://expressjs.com/en/resources/middleware/cors.html
+    cors: false,
 
     // Used for caching GitHub API responses
-    dataPath: "data/",
+    dataPath: "./data/",
 
-    // Used to sign the session ID cookie, see https://www.npmjs.com/package/express-session#secret
+    // Used for storing user sessions
+    sessionPath: "./sessions/",
+
+    // Used to sign the session ID cookie
+    // see: https://www.npmjs.com/package/express-session#secret
     sessionSecret: "Curiouser and curiouser",
     
     // GitHub authentication
