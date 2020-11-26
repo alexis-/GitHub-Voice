@@ -3,7 +3,10 @@
     <base-nav class="navbar-main mb-4" type="" effect="dark" expand>
       <router-link slot="brand" class="navbar-brand mr-sm-5" to="/">
         <!-- <img src="img/brand/white.png" alt="logo"> -->
-        <h5 class="align-middle my-0 text-white"><i class="far fa-comment-dots mx-2"></i> {{appTitle()}}</h5>
+        <h5 class="align-middle my-0 text-white">
+          <i class="far fa-comment-dots mx-2"></i> {{appTitle()}}
+          <badge class="ml-1 pt-2" custom-color="red">BETA</badge>
+        </h5>
       </router-link>
 
       <ul class="navbar-nav align-items-center ml-auto">
@@ -48,10 +51,12 @@
 
 <script>
 import BaseNav from '@/components/BaseNav.vue';
+import Badge from '@/components/Badge.vue';
 
 export default {
   components: {
     BaseNav,
+    Badge,
   },
   computed: {
     user() {

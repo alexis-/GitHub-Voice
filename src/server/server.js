@@ -1,11 +1,11 @@
 const express = require('express');
 
-const { setupServer, runTasks } = require('./config');
+const { configServer, runTasks } = require('./config');
 
 const { port = 3000 } = global.cfg.server;
 const app = express();
 
-setupServer(app);
+configServer(app);
 runTasks();
 
 // Go

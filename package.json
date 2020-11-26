@@ -16,7 +16,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "watch": "vue-cli-service serve --watch",
-    "build": "vue-cli-service build",
+    "build": "cross-env NODE_ENV=production vue-cli-service build",
+    "build-dev": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "config": "^3.3.2",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "moment": "^2.29.1",

@@ -15,7 +15,7 @@
 
   client: {
     // Defines the browser's and nav bar title
-    appTitle: "GitHub Voice",
+    title: "GitHub Voice",
 
     // URL to this server's API
     apiBaseUrl: "http://localhost:8080/"

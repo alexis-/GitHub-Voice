@@ -67,11 +67,12 @@ const processAndSaveAllRepoIssues = () => {
 };
 
 const pullIssues = () => {
-  getAllRepoIssues().then((hasNewDataArray) => {
-    if (hasNewDataArray.some((hasNewData) => hasNewData.value)) {
-      processAndSaveAllRepoIssues();
-    }
-  }).catch(console.warn);
+  getAllRepoIssues()
+    .then((hasNewDataArray) => {
+      if (hasNewDataArray.some((hasNewData) => hasNewData.value)) {
+        processAndSaveAllRepoIssues();
+      }
+    }).catch(console.warn);
 };
 
 module.exports = pullIssues;

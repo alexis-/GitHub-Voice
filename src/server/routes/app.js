@@ -2,10 +2,10 @@ const express = require('express');
 const { resolve } = require('path');
 const history = require('connect-history-api-fallback');
 
-const { ENV_NODE = 'development' } = process.env;
+const { NODE_ENV = 'development' } = process.env;
 
 // SPA static files
-const publicPath = resolve(__dirname, '../../dist');
+const publicPath = resolve('dist/');
 const staticConf = { maxAge: '1y', etag: false };
 
 const router = module.exports = express.Router();
@@ -24,7 +24,7 @@ const router = module.exports = express.Router();
 ); */
 
 // SPA client routes & static assets
-if (ENV_NODE.trim() === 'production') {
+if (NODE_ENV.trim() === 'production') {
   router.use(express.static(publicPath, staticConf));
   router.use('/', history());
 }

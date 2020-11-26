@@ -21,7 +21,7 @@ passport.use(
     {
       clientID: global.cfg.server.gitHubClientId,
       clientSecret: global.cfg.server.gitHubClientSecret,
-      callbackURL: '/auth/callback',
+      callbackURL: new URL('/auth/callback', global.cfg.client.apiBaseUrl).href,
       passReqToCallback: true,
     },
     (req, accessToken, refreshToken, profile, cb) => {

@@ -64,10 +64,10 @@ import issuesService from '@/services/issuesService';
 export default {
   created() {
     issuesService.list()
-      .catch(console.warn)
       .then((resp) => {
         this.repoIssues = this.processIssuesResp(resp);
-      });
+      })
+      .catch(console.warn);
   },
   data() {
     return {
@@ -109,7 +109,6 @@ export default {
       }
 
       gitService.getReactions(issue.reactions.url)
-        .catch(console.debug)
         .then((resp1) => {
           if (resp1 === undefined || resp1.status !== 200) {
             return;
@@ -123,7 +122,6 @@ export default {
             : gitService.delReaction(issue.reactions.url, userReaction.id);
 
           apiCall
-            .catch(console.debug)
             .then((resp2) => {
               if (resp2 === undefined || resp2.status >= 400) {
                 return;
@@ -134,8 +132,10 @@ export default {
               } else {
                 issue.reactions['+1']--;
               }
-            });
-        });
+            })
+            .catch(console.debug);
+        })
+        .catch(console.debug);
     },
     processIssuesResp(resp) {
       if (!resp || !resp.data) {
