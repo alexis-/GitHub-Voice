@@ -3,7 +3,9 @@
                :type="tag === 'button' ? nativeType: ''"
                @click="handleClick"
                class="btn"
-               :class="classes">
+               :class="classes"
+               :data-toggle="toggleable ? 'button' : ''"
+               :aria-pressed="toggleable ? toggled.toString() : ''">
     <span class="btn-inner--icon" v-if="$slots.icon || icon && $slots.default">
       <slot name="icon">
         <i :class="icon"></i>
@@ -77,6 +79,16 @@ export default {
       default: false,
       description: 'Whether button is of block type',
     },
+    toggled: {
+      type: Boolean,
+      default: false,
+      description: "When toggleable is true, whether the button is toggled by default or not",
+    },
+    toggleable: {
+      type: Boolean,
+      default: false,
+      description: "Whether the button is toggleable or not",
+    },
   },
   computed: {
     classes() {
@@ -88,6 +100,7 @@ export default {
         { 'btn-icon': this.icon || this.$slots.icon },
         this.type && !this.outline ? `btn-${this.type}` : '',
         this.outline ? `btn-outline-${this.type}` : '',
+        this.toggleable && this.toggled ? 'active': '',
       ];
       if (this.size) {
         btnClasses.push(`btn-${this.size}`);
@@ -97,6 +110,7 @@ export default {
   },
   methods: {
     handleClick(evt) {
+      this.$emit('update:toggled', !this.toggled);
       this.$emit('click', evt);
     },
   },

@@ -17,10 +17,16 @@ export default class Issue {
   number: number;
   title: string;
   comments: number;
+
+  /* eslint-disable camelcase */
   created_at: string | Moment;
 
   labels: Array<Label>;
   reactions: Reactions;
 
   repo: Repository | null;
+
+  get url(): string {
+    return `https://github.com/${(this.repo as Repository).orgAndRepo}/issues/${this.number}`;
+  }
 }

@@ -8,7 +8,17 @@ const httpClient = axios.create({
 });
 
 export default {
-  listAsync() {
-    return httpClient.get<Array<Repository>>('/issues');
+  async listAsync() {
+    const resp = await httpClient.get<Array<Repository>>('/issues');
+
+    if (resp.data) {
+      resp.data = resp.data.map((r) => new Repository(
+        r.orgAndRepo,
+        r.displayName,
+        r.issues),
+      );
+    }
+
+    return resp;
   },
 };

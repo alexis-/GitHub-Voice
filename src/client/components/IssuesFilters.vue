@@ -1,7 +1,15 @@
 <template>
   <div class="d-flex flex-justify-between mb-3 flex-column-reverse flex-md-row flex-items-end">
-    <div class="d-none d-md-flex justify-content-start flex-auto w-100 my-4 my-md-0">
-      <p>Placeholder</p>
+    <div class="d-flex justify-content-start flex-auto w-100 mt-3 my-md-0">
+      <div class="btn-group" role="group" aria-label="Repository group">
+        <base-button v-for="(repo, idx) in repoIssues" :key="idx"
+                     type="outline-default"
+                     :toggleable="true"
+                     :toggled.sync="repo.isDisplayed"
+                     @click="searchThrottled">
+          {{repo.displayName}}
+        </base-button>
+      </div>
     </div>
     <div class="ml-md-3 d-flex justify-content-between w-100 w-md-auto">
       <base-input v-model="searchTerm"
@@ -50,12 +58,17 @@ export default class IssuesFilters extends Vue {
   @Watch('repoIssues')
   filterIssues(newRepoData: Repository[]) {
     const filteredIssues = this.repoIssues
+      .filter(this.filterRepo, this)
       .map((repo) => repo.issues)
       .flat()
       .filter(this.filterSearchIssues, this)
       .sort(this.sortIssues);
 
     this.$emit('update:filtered-issues', filteredIssues);
+  }
+
+  private filterRepo(r: Repository, _idx: number, _arr: Repository[]): boolean {
+    return r.isDisplayed;
   }
 
   private filterSearchIssues(i: Issue, _idx: number, _arr: Issue[]): boolean {

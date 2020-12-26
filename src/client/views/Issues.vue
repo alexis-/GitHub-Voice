@@ -71,7 +71,6 @@ export default class Issues extends Vue {
         repo.issues.forEach((i) => {
           i.repo = repo;
           i.created_at = moment(i.created_at);
-          // i.displayElapsedTime = i.createdMoment.fromNow();
         });
       });
 
@@ -79,7 +78,7 @@ export default class Issues extends Vue {
   }
 
   get showProjectColumn(): boolean {
-    return Object.keys(this.repoIssues).length > 1;
+    return this.repoIssues.length > 1;
   }
 }
 

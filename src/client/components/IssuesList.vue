@@ -12,10 +12,10 @@
             </base-button>
           </th>
           <td class="fit" v-if="showProjectColumn">
-            <span>{{issue.repo.projectName}}</span>
+            <span>{{issue.repo.displayName}}</span>
           </td>
           <td>
-            <a :href="issue.html_url" class="no-link" target="_blank">{{issue.title}}</a>
+            <a :href="issue.url" class="no-link" target="_blank">{{issue.title}}</a>
             <div>
               <small class="mr-2 text-muted">{{issue.created_at.fromNow()}}</small>
               <badge rounded v-for="(label, idx) in issue.labels"
