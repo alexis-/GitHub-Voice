@@ -14,7 +14,11 @@ jobs:
 
       - name: Install and Build 🔧
         env:
+          GH_VOICE_SRV_API_PATH: ${{ secrets.GH_VOICE_SRV_API_PATH }}
+
+          GH_VOICE_CLIENT_TITLE: ${{ secrets.GH_VOICE_CLIENT_TITLE }}
           GH_VOICE_CLIENT_API_HOST: ${{ secrets.GH_VOICE_CLIENT_API_HOST }}
+          GH_VOICE_CLIENT_PUBLIC_PATH: ${{ secrets.GH_VOICE_CLIENT_PUBLIC_PATH }}
         run: |
           npm install
           npm run-script build:client
