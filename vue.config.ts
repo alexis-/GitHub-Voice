@@ -1,12 +1,13 @@
 /* eslint-disable global-require */
-const path = require('path');
+import path from 'path';
 
+// VS code doesn't recognize alias, use full path to mute error
 import './src/common/global';
-require('./src/common/env-config')();
+import '~/env-config';
 
 module.exports = {
   outputDir: './dist/client',
-  publicPath: (global as NodeJS.Global).cfg.client.publicPath,
+  publicPath: global.cfg.client.publicPath,
   configureWebpack: {
     devtool: 'source-map',
     resolve: {

@@ -1,6 +1,6 @@
 import express from 'express';
 
-require('~/env-config')();
+import '~/env-config';
 
 import { configServer, initialize } from '@/config';
 
