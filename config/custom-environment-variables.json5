@@ -14,5 +14,6 @@
   client: {
     title: "GH_VOICE_CLIENT_TITLE",
     apiHost: "GH_VOICE_CLIENT_API_HOST",
+    publicPath: "GH_VOICE_CLIENT_PUBLIC_PATH"
   }
 }

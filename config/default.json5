@@ -31,6 +31,10 @@
     // Defines the browser's and nav bar title
     title: "GitHub Voice",
 
+    // Vue's public path
+    // see: https://cli.vuejs.org/config/#publicpath
+    publicPath: "/",
+
     // Host for the API. Do not include the path (see server.apiPath).
     apiHost: "http://localhost:8080/",
 

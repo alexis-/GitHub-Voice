@@ -1,11 +1,12 @@
 /* eslint-disable global-require */
 const path = require('path');
 
-require('./src/common/global');
+import './src/common/global';
 require('./src/common/env-config')();
 
 module.exports = {
   outputDir: './dist/client',
+  publicPath: global.cfg.client.publicPath,
   configureWebpack: {
     devtool: 'source-map',
     resolve: {

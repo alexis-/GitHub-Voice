@@ -4,6 +4,7 @@ declare global {
   interface GHConfigClient {
     title: string;
     apiHost: string;
+    publicPath: string;
     socialGitHub: string;
     socialFacebook: string;
     socialTwitter: string;
