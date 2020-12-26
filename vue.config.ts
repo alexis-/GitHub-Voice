@@ -6,7 +6,7 @@ require('./src/common/env-config')();
 
 module.exports = {
   outputDir: './dist/client',
-  publicPath: global.cfg.client.publicPath,
+  publicPath: (global as NodeJS.Global).cfg.client.publicPath,
   configureWebpack: {
     devtool: 'source-map',
     resolve: {
