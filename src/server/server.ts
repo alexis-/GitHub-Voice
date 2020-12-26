@@ -1,12 +1,14 @@
-const express = require('express');
+import express from 'express';
 
-const { configServer, runTasks } = require('./config');
+import { configServer, initialize } from '@/config';
+
+require('~/env-config')();
 
 const { port = 3000 } = global.cfg.server;
 const app = express();
 
 configServer(app);
-runTasks();
+initialize();
 
 // Go
 app.listen(port, () => console.log(`App running on port ${port}!`));

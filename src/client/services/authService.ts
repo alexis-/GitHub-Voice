@@ -6,13 +6,15 @@ const httpClient = axios.create({
 });
 
 export default {
-  signIn() {
+  signInAsync() {
     return httpClient.get('/auth');
   },
-  signOut() {
+
+  signOutAsync() {
     return httpClient.get('/auth/logout');
   },
-  getUser() {
+
+  getUserAsync() {
     return httpClient.get('/auth/user');
   },
 };

@@ -1,6 +1,6 @@
 {
   server: {
-    port: 8080,
+    port: 3000,
     
     // Url prefix path to the api. Use "/" if for hosting the api at the root level of a domain/subdomain
     apiPath: "api/",
@@ -8,7 +8,7 @@
     // Whether this node instance should serve both the API and the Vue client's static files (in dist/)
     serveStaticFiles: true,
 
-    // false: No CORS, true: Allow all CORS, <url>: enable CORS on given host
+    // false: No CORS, '*': Allow all CORS, <url>: enable CORS on given host
     // see: https://expressjs.com/en/resources/middleware/cors.html
     cors: false,
 
@@ -20,7 +20,7 @@
 
     // Used to sign the session ID cookie
     // see: https://www.npmjs.com/package/express-session#secret
-    sessionSecret: "Curiouser and curiouser",
+    sessionsSecret: "Curiouser and curiouser",
     
     // GitHub authentication
     gitHubClientId: "",
@@ -31,12 +31,28 @@
     // Defines the browser's and nav bar title
     title: "GitHub Voice",
 
-    // URL to this server's API
-    apiBaseUrl: "http://localhost:8080/"
+    // Host for the API. Do not include the path (see server.apiPath).
+    apiHost: "http://localhost:8080/",
+
+    // Social links
+    socialGitHub: "",
+    socialFacebook: "",
+    socialTwitter: "",
+    socialDiscord: "",
   },
 
-  // Which repositories' issues should be displayed to the client
+  // Which repositories' issues should be displayed to the client.
+  // Regroup repositories together to create categories. If only a single group exists, the categories will be hidden in the client.
   repositories: [
     { orgAndRepo: "alexis-/GitHubVoice-TestRepo", displayName: "GitHub Voice" },
-  ]
+  ],
+  // repositoryGroups: [
+  //   {
+  //     name: "GitHub Voice",
+  //     color: null,
+  //     repositories: [
+  //       { orgAndRepo: "alexis-/GitHubVoice-TestRepo", displayName: "GitHub Voice" },
+  //     ],
+  //   },
+  // ]
 }

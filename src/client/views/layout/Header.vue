@@ -10,32 +10,52 @@
       </router-link>
 
       <ul class="navbar-nav align-items-center ml-auto">
-        <li class="nav-item">
+        <li class="nav-item" v-if="socialLinkGitHub">
           <a class="nav-link nav-link-icon"
-             href="https://github.com/supermemo/"
+             :href="socialLinkGitHub"
              target="_blank"
-             data-toggle="tooltip" title="See the SuperMemo Github">
+             data-toggle="tooltip" title="Visit our Github page">
             <i class="fab fa-github"></i>
             <span class="nav-link-inner--text d-none">Github</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-icon" href="https://discord.gg/vUQhqCT"
-              target="_blank" data-toggle="tooltip" title="Join our Discord server">
+        <li class="nav-item" v-if="socialLinkFacebook">
+          <a class="nav-link nav-link-icon"
+             :href="socialLinkFacebook"
+             target="_blank"
+             data-toggle="tooltip" title="Visit our Facebook page">
+            <i class="fab fa-facebook"></i>
+            <span class="nav-link-inner--text d-none">Facebook</span>
+          </a>
+        </li>
+        <li class="nav-item" v-if="socialLinkTwitter">
+          <a class="nav-link nav-link-icon"
+             :href="socialLinkTwitter"
+             target="_blank"
+             data-toggle="tooltip" title="Visit our Twitter page">
+            <i class="fab fa-twitter"></i>
+            <span class="nav-link-inner--text d-none">Twitter</span>
+          </a>
+        </li>
+        <li class="nav-item" v-if="socialLinkGitHub">
+          <a class="nav-link nav-link-icon"
+             href="https://discord.gg/vUQhqCT"
+             target="_blank"
+             data-toggle="tooltip" title="Join our Discord server">
               <i class="fab fa-discord"></i>
               <span class="nav-link-inner--text d-none">Discord</span>
           </a>
         </li>
-        <li class="nav-item ml-sm-4" v-if="isLoggedIn">
-          <a href="/auth/logout"
+        <li class="nav-item ml-sm-3" v-if="isLoggedIn">
+          <a :href="authSignOut"
              :alt="user.username"
              target="_self"
              class="btn btn-sm btn-user">
             <img :src="user.photos[0].value" />
           </a>
         </li>
-        <li class="nav-item ml-sm-4" v-else>
-          <a href="/auth"
+        <li class="nav-item ml-sm-3" v-else>
+          <a :href="authSignIn"
              target="_self"
              class="btn btn-success btn-icon btn-sm">
             <span class="btn-inner--icon h6 text-white">
@@ -49,11 +69,12 @@
   </header>
 </template>
 
-<script>
-import BaseNav from '@/components/BaseNav.vue';
-import Badge from '@/components/Badge.vue';
+<script lang="ts">
+import Vue from 'vue';
+import BaseNav from '@/components/base/BaseNav.vue';
+import Badge from '@/components/base/Badge.vue';
 
-export default {
+export default Vue.extend({
   components: {
     BaseNav,
     Badge,
@@ -65,13 +86,31 @@ export default {
     isLoggedIn() {
       return this.$store.getters['auth/isAuthenticated'];
     },
+    authSignIn() {
+      return `${process.env.VUE_APP_API_BASE_URL}auth`;
+    },
+    authSignOut() {
+      return `${process.env.VUE_APP_API_BASE_URL}auth/logout`;
+    },
+    socialLinkGitHub() {
+      return process.env.VUE_APP_SOCIAL_GIT_HUB;
+    },
+    socialLinkFacebook() {
+      return process.env.VUE_APP_SOCIAL_FACEBOOK;
+    },
+    socialLinkTwitter() {
+      return process.env.VUE_APP_SOCIAL_TWITTER;
+    },
+    socialLinkDiscord() {
+      return process.env.VUE_APP_SOCIAL_DISCORD;
+    },
   },
   data() {
     return {
       appTitle: () => process.env.VUE_APP_TITLE,
     };
   },
-};
+});
 </script>
 
 <style scoped lang="scss">

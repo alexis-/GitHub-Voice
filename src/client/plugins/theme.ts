@@ -6,19 +6,19 @@ import '@/assets/vendor/font-awesome/css/font-awesome.css';
 import '@/assets/scss/argon.scss';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-import Badge from '@/components/Badge.vue';
-import BaseAlert from '@/components/BaseAlert.vue';
-import BaseButton from '@/components/BaseButton.vue';
-import BaseCheckbox from '@/components/BaseCheckbox.vue';
-import BaseInput from '@/components/BaseInput.vue';
-import BasePagination from '@/components/BasePagination.vue';
-import BaseProgress from '@/components/BaseProgress.vue';
-import BaseRadio from '@/components/BaseRadio.vue';
-import BaseSlider from '@/components/BaseSlider.vue';
-import BaseSwitch from '@/components/BaseSwitch.vue';
-import Card from '@/components/Card.vue';
-import Icon from '@/components/Icon.vue';
-import Modal from '@/components/Modal.vue';
+import Badge from '@/components/base/Badge.vue';
+import BaseAlert from '@/components/base/BaseAlert.vue';
+import BaseButton from '@/components/base/BaseButton.vue';
+import BaseCheckbox from '@/components/base/BaseCheckbox.vue';
+import BaseInput from '@/components/base/BaseInput.vue';
+import BasePagination from '@/components/base/BasePagination.vue';
+import BaseProgress from '@/components/base/BaseProgress.vue';
+import BaseRadio from '@/components/base/BaseRadio.vue';
+import BaseSlider from '@/components/base/BaseSlider.vue';
+import BaseSwitch from '@/components/base/BaseSwitch.vue';
+import Card from '@/components/base/Card.vue';
+import Icon from '@/components/base/Icon.vue';
+import Modal from '@/components/base/Modal.vue';
 
 export default {
   install(Vue: VueConstructor) {

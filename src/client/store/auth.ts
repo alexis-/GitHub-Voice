@@ -32,12 +32,14 @@ export default {
     AUTH_SUCCESS(state, { token, user }) {
       state.isLoading = false;
       state.error = null;
-      state.isAuthenticated = true;
-      state.user = user;
-      state.token = token;
 
-      console.debug(`Logged in as ${user}`);
-      // console.log(user);
+      if (user !== null && user !== undefined) {
+        state.isAuthenticated = true;
+        state.user = user;
+        state.token = token;
+
+        console.debug(`Logged in as ${user.username}`);
+      }
     },
     AUTH_FAILURE(state, error) {
       state.isLoading = false;
@@ -64,7 +66,7 @@ export default {
     initializeStore({ commit }) {
       commit('AUTH_REFRESHING');
 
-      AuthAPI.getUser()
+      AuthAPI.getUserAsync()
         .then((res) => commit('AUTH_SUCCESS', res.data))
         .catch((err) => commit('AUTH_FAILURE', err));
     },

@@ -1,6 +1,6 @@
-const express = require('express');
-const { resolve } = require('path');
-const history = require('connect-history-api-fallback');
+import express from 'express';
+import { resolve } from 'path';
+import history from 'connect-history-api-fallback';
 
 const { NODE_ENV = 'development' } = process.env;
 
@@ -15,3 +15,5 @@ if (NODE_ENV.trim() === 'production' && global.cfg.server.serveStaticFiles) {
   router.use(express.static(publicPath, staticConf));
   router.use('/', history());
 }
+
+export default router;

@@ -19,8 +19,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   computed: {
     showModal: {
       get() {
@@ -33,8 +35,8 @@ export default {
   },
   methods: {
     SignInWithGithub(evt) {
-      window.location = '/auth';
+      window.location.href = '/auth';
     },
   },
-};
+});
 </script>

@@ -1,6 +1,16 @@
-const express = require('express');
-const passport = require('passport');
+import express, { Request, Response } from 'express';
+
+import passport from 'passport';
+
+import('express-session');
 const passportGitHub = require('passport-github');
+
+declare module 'express-session' {
+  interface SessionData {
+    accessToken: string;
+    refreshToken: string;
+  }
+}
 
 const router = module.exports = express.Router();
 
@@ -21,10 +31,10 @@ passport.use(
     {
       clientID: global.cfg.server.gitHubClientId,
       clientSecret: global.cfg.server.gitHubClientSecret,
-      callbackURL: new URL('/auth/callback', global.cfg.client.apiBaseUrl).href,
+      callbackURL: new URL(`${global.cfg.server.apiPath}auth/callback`, global.cfg.client.apiHost).href,
       passReqToCallback: true,
     },
-    (req, accessToken, refreshToken, profile, cb) => {
+    (req: Request, accessToken: string, refreshToken: string, profile: any, cb: Function) => {
       req.session.accessToken = accessToken;
       req.session.refreshToken = refreshToken;
 
@@ -55,13 +65,15 @@ router.get('/',
 router.get('/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
+    console.log(`user: ${req.user}`);
+    console.log(`session: ${req.user}`);
     res.redirect('/');
   },
 );
 
 router.get('/user',
   (req, res) => {
-    if (req.isAuthenticated) {
+    if (req.isAuthenticated()) {
       res.json({
         user: req.user,
         token: req.session.accessToken,
@@ -80,3 +92,5 @@ router.get('/logout',
     res.sendStatus(200);
   },
 );
+
+export default router;

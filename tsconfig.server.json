@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "commonjs",
+    "outDir": "dist/server",
     "strict": true,
     "strictPropertyInitialization": false,
     "jsx": "preserve",
@@ -11,7 +12,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "sourceMap": true,
     "baseUrl": ".",
     "typeRoots": [
@@ -23,7 +24,7 @@
     ],
     "paths": {
       "@/*": [
-        "./src/client/*",
+        "./src/server/*",
       ],
       "~/*": [
         "./src/common/*",
@@ -36,16 +37,19 @@
       "scripthost"
     ]
   },
+  "files": [ "src/server/server.ts"],
   "include": [
-    "src/client/**/*.ts",
-    "src/client/**/*.tsx",
+    "src/server/**/*.js",
+    "src/server/**/*.ts",
+    "src/server/**/*.tsx",
+    "src/common/**/*.js",
     "src/common/**/*.ts",
     "src/common/**/*.tsx",
-    "src/client/**/*.vue",
-    "tests/client/**/*.ts",
-    "tests/client/**/*.tsx"
+    "tests/server/**/*.ts",
+    "tests/server/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

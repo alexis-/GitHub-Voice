@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import Issue from '~/models/issue';
+import Repository from '~/models/cl-repository';
+
 const httpClient = axios.create({
   baseURL: 'https://api.github.com',
   headers: { Accept: 'application/vnd.github.v3+json' },
@@ -7,25 +10,25 @@ const httpClient = axios.create({
 
 export default {
   httpClient,
-  listIssues(userOrOrg: string, repo: string) {
-    return httpClient.get(`/repos/${userOrOrg}/${repo}/issues`, {
+  listIssues(repo: Repository) {
+    return httpClient.get(`/repos/${repo.orgAndRepo}/issues`, {
       headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },
     });
   },
-  getReactions(url: string, reaction: string) {
-    return httpClient.get(url, {
+  getReactions(issue: Issue) {
+    return httpClient.get(`/repos/${issue.repo!.orgAndRepo}/issues/${issue.number}/reactions`, {
       headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },
     });
   },
-  addReaction(url: string, reaction: string) {
-    return httpClient.post(url, {
+  addReaction(issue: Issue, reaction: string) {
+    return httpClient.post(`/repos/${issue.repo!.orgAndRepo}/issues/${issue.number}/reactions`, {
       content: reaction,
     }, {
       headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },
     });
   },
-  delReaction(url: string, reactionId: number) {
-    return httpClient.delete(`${url}/${reactionId}`, {
+  delReaction(issue: Issue, reactionId: number) {
+    return httpClient.delete(`/repos/${issue.repo!.orgAndRepo}/issues/${issue.number}/reactions/${reactionId}`, {
       headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },
     });
   },
