@@ -9,6 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import Badge from '@/components/base/Badge.vue';
 import BaseAlert from '@/components/base/BaseAlert.vue';
 import BaseButton from '@/components/base/BaseButton.vue';
+import BaseDropdown from '@/components/base/BaseDropdown.vue';
 import BaseCheckbox from '@/components/base/BaseCheckbox.vue';
 import BaseInput from '@/components/base/BaseInput.vue';
 import BasePagination from '@/components/base/BasePagination.vue';
@@ -27,6 +28,7 @@ export default {
     Vue.component(Badge.name, Badge);
     Vue.component(BaseAlert.name, BaseAlert);
     Vue.component(BaseButton.name, BaseButton);
+    Vue.component(BaseDropdown.name, BaseDropdown);
     Vue.component(BaseInput.name, BaseInput);
     Vue.component(BaseCheckbox.name, BaseCheckbox);
     Vue.component(BasePagination.name, BasePagination);

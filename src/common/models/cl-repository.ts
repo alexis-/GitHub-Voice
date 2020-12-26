@@ -19,4 +19,8 @@ export default class Repository extends RepositoryBase {
       this.issues = [];
     }
   }
+
+  get url(): string {
+    return `https://github.com/${this.orgAndRepo}`;
+  }
 }

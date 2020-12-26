@@ -39,6 +39,7 @@
                        :prevHotKey="['arrowleft']"
                        :nextHotKey="['arrowright']"
                        v-model="pageNo"
+                       class="mt-3"
                        align="center">
       </base-pagination>
     </div>
