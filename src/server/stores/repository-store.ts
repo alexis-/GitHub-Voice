@@ -1,4 +1,5 @@
 import { asyncParallelForEach, ParallelResultArray, asyncOptions } from 'async-parallel-foreach';
+import * as crypto from 'crypto';
 
 import Repository from '@/models/srv-repository';
 import ClientRepository from '~/models/cl-repository';
@@ -7,8 +8,14 @@ import '@/impl/srv-repository-impl';
 
 import cache, { cacheCfg } from '@/stores/cache-store';
 
+export type JsonAndETag = {
+  json: string,
+  eTag: string,
+};
+
 export class RepositoryStore {
   private repoIssuesCacheKey: string = `repoIssues_${Math.random()}`;
+  private repoIssuesEtagCacheKey: string = `repoIssues_eTag_${Math.random()}`;
   private repositoriesDict: Record<string, Repository> = {};
 
   get all(): Repository[] {
@@ -16,8 +23,14 @@ export class RepositoryStore {
   }
 
   // ClientRepository[]
-  getRepoIssuesJsonAsync(): Promise<string> {
-    return cache.get(this.repoIssuesCacheKey);
+  async getRepoIssuesAsync(): Promise<JsonAndETag> {
+    const json = await cache.get(this.repoIssuesCacheKey);
+    const eTag = await cache.get(this.repoIssuesEtagCacheKey);
+
+    return {
+      json: json,
+      eTag: eTag,
+    };
   }
 
   initialize(repositories: GHConfigRepository[]) {
@@ -58,7 +71,11 @@ export class RepositoryStore {
         }, asyncOptions,
       );
 
-      await cache.set(this.repoIssuesCacheKey, JSON.stringify(allRepoIssues), cacheCfg);
+      const json = JSON.stringify(allRepoIssues);
+      const eTag = crypto.createHash('sha512').update(json).digest('hex');
+
+      await cache.set(this.repoIssuesCacheKey, json, cacheCfg);
+      await cache.set(this.repoIssuesEtagCacheKey, eTag, cacheCfg);
 
       console.debug('Saved all processed issues to cache.');
     } catch (ex) {

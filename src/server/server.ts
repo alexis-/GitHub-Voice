@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { configServer, initialize } from '@/config';
-
 require('~/env-config')();
+
+import { configServer, initialize } from '@/config';
 
 const { port = 3000 } = global.cfg.server;
 const app = express();

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Axios from 'axios';
+import VueShortkey from 'vue-shortkey';
 
 import theme from '@/plugins/theme';
 import setupAxiosAuth from '@/plugins/authInterceptors';
@@ -12,6 +13,7 @@ import App from './App.vue';
 
 Vue.config.productionTip = false;
 
+Vue.use(VueShortkey);
 Vue.use(theme);
 
 new Vue({

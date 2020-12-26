@@ -34,7 +34,13 @@
       </tbody>
     </table>
     <div>
-      <base-pagination :per-page="pageItems" :total="displayedIssuesCount" v-model="pageNo" align="center"></base-pagination>
+      <base-pagination :per-page="pageItems"
+                       :total="displayedIssuesCount"
+                       :prevHotKey="['arrowleft']"
+                       :nextHotKey="['arrowright']"
+                       v-model="pageNo"
+                       align="center">
+      </base-pagination>
     </div>
   </div>
 </template>

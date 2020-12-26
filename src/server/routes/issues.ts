@@ -5,10 +5,12 @@ import repoStore from '@/stores/repository-store';
 const router = module.exports = AsyncRouter();
 
 router.getAsync('/', async (req, resp) => {
-  const repoIssues = await repoStore.getRepoIssuesJsonAsync();
+  const repoIssues = await repoStore.getRepoIssuesAsync();
 
-  resp.writeHead(200, { 'Content-Type': 'application/json' });
-  resp.end(repoIssues);
+  resp.status(200);
+  resp.setHeader('Content-Type', 'application/json');
+  resp.setHeader('ETag', `"${repoIssues.eTag}"`);
+  resp.end(repoIssues.json);
 });
 
 export default router;

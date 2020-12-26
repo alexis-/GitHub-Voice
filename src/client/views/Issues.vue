@@ -36,16 +36,32 @@ export default class Issues extends Vue {
   repoIssues: Array<Repository> = [];
   filteredIssues: Array<Issue> = [];
 
+  refreshTimer: NodeJS.Timeout;
+
+  issuesETag: string = '';
+
   created() {
+    this.refreshIssues();
+
+    this.refreshTimer = setInterval(this.refreshIssues, 60 * 1000);
+  }
+
+  beforeDestroy() {
+    clearInterval(this.refreshTimer);
+  }
+
+  refreshIssues() {
     issuesService.listAsync()
       .then(this.processIssuesResp)
       .catch(console.warn);
   }
 
   processIssuesResp(resp: AxiosResponse<Repository[]>) {
-    if (!resp || !resp.data) {
+    if (!resp || !resp.data || resp.headers.etag === this.issuesETag) {
       return;
     }
+
+    this.issuesETag = resp.headers.etag;
 
     const repoIssues = resp.data;
 
