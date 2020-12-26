@@ -15,7 +15,7 @@
   "scripts": {
     "serve": "concurrently \"npm run debug:server\" \"npm run debug:client\" --raw",
     "build:client": "vue-cli-service build",
-    "build:server": "rimraf dist/server && tsc -p tsconfig.server.json",
+    "build:server": "rimraf dist/server && tsc -p tsconfig.server.json && tscpaths -p tsconfig.server.json -s ./src/ -o ./dist/server",
     "debug:client": "vue-cli-service serve --watch",
     "debug:server": "nodemon --config ./nodemon.config.json",
     "lint": "vue-cli-service lint"
@@ -51,6 +51,7 @@
     "session-file-store": "^1.5.0",
     "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
+    "tscpaths": "0.0.9",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
