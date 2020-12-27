@@ -1,7 +1,11 @@
 {
+  common: {
+    apiUrl: "GH_VOICE_API_URL",
+    webUrl: "GH_VOICE_WEB_URL",
+  },
+
   server: {
     port: "GH_VOICE_SRV_PORT",
-    apiPath: "GH_VOICE_SRV_API_PATH",
     serveStaticFiles: "GH_VOICE_SRV_SERVE_STATIC_FILES",
     cors: "GH_VOICE_SRV_CORS",
     dataPath: "GH_VOICE_SRV_DATA_PATH",
@@ -13,7 +17,10 @@
 
   client: {
     title: "GH_VOICE_CLIENT_TITLE",
-    apiHost: "GH_VOICE_CLIENT_API_HOST",
-    publicPath: "GH_VOICE_CLIENT_PUBLIC_PATH"
+    publicPath: "GH_VOICE_CLIENT_PUBLIC_PATH",
+    socialGitHub: "GH_VOICE_CLIENT_SOCIAL_GITHUB",
+    socialFacebook: "GH_VOICE_CLIENT_SOCIAL_FACEBOOK",
+    socialTwitter: "GH_VOICE_CLIENT_SOCIAL_TWITTER",
+    socialDiscord: "GH_VOICE_CLIENT_SOCIAL_DISCORD",
   }
 }

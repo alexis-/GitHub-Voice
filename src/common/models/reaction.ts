@@ -1,9 +1,16 @@
-export default class Reactions {
-  constructor(reactions: any) {
-    this.url = reactions.url;
-    this['+1'] = reactions['+1'];
+import { Moment } from 'moment';
+
+import User from './user';
+
+export default class Reaction {
+  constructor(reaction: any) {
+    this.id = reaction.id;
   }
 
-  url: string;
-  '+1': number;
+  id: number;
+  content: string;
+  user: User;
+
+  /* eslint-disable camelcase */
+  created_at: string | Moment;
 }

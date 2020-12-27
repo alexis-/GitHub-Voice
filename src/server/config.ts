@@ -4,6 +4,9 @@ import session from 'express-session';
 import cron from 'node-cron';
 import path from 'path';
 import fs from 'fs';
+import tldjs from 'tldjs';
+
+const FileStore = require('session-file-store')(session);
 
 import appRoute from '@/routes/app';
 import authRoute from '@/routes/auth';
@@ -11,29 +14,48 @@ import issuesRoute from '@/routes/issues';
 
 import repoStore from '@/stores/repository-store';
 
-const FileStore = require('session-file-store')(session);
+function getApiPath(apiEndpoint: string) {
+  return global.cfg.common.apiPath + apiEndpoint;
+}
 
-const getApiPath = (apiEndpoint: string) => global.cfg.server.apiPath + apiEndpoint;
-const corsOptions = {
+function getRootDomain(webUrl: string) {
+  const parsed = tldjs.parse(webUrl);
+
+  if (parsed.isValid === false) {
+    throw new Error(`Invalid config value for webUrl: '${webUrl}'`);
+  }
+
+  return [ parsed.hostname, parsed.publicSuffix ].includes('localhost')
+    ? 'localhost'
+    : tldjs.getDomain(webUrl);
+}
+
+const oneYear = 60000 * 60 * 24 * 365;
+const cookiesDomain = getRootDomain(global.cfg.common.webUrl);
+const corsOptions: cors.CorsOptions = {
   origin: global.cfg.server.cors,
+  credentials: true,
 };
 
 export const configServer = (app : express.Application) => {
   app.use(session({
     cookie: {
-      maxAge: 60000 * 60 * 24 * 365, // 1 year
+      domain: cookiesDomain || '',
+      maxAge: oneYear,
     },
     resave: false,
     store: new FileStore({
       path: path.resolve(global.cfg.server.sessionsPath),
       secret: global.cfg.server.sessionsSecret,
+      ttl: oneYear,
     }),
     saveUninitialized: false,
     secret: global.cfg.server.sessionsSecret,
   }));
 
-  app.use(getApiPath('auth'), cors(corsOptions), authRoute);
-  app.use(getApiPath('issues'), cors(corsOptions), issuesRoute);
+  app.use(cors(corsOptions));
+  app.use(getApiPath('auth'), authRoute);
+  app.use(getApiPath('issues'), issuesRoute);
   app.use('/', appRoute);
 };
 

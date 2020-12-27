@@ -1,9 +1,8 @@
 import express, { Request, Response } from 'express';
-
 import passport from 'passport';
-
+import OAuth2Strategy from 'passport-oauth2';
 import('express-session');
-const passportGitHub = require('passport-github');
+import passportGitHub, { OAuth2StrategyOptionsWithoutRequiredURLs } from 'passport-github';
 
 declare module 'express-session' {
   interface SessionData {
@@ -12,7 +11,7 @@ declare module 'express-session' {
   }
 }
 
-const router = module.exports = express.Router();
+const router = express.Router();
 
 // Initialize passport
 
@@ -31,10 +30,15 @@ passport.use(
     {
       clientID: global.cfg.server.gitHubClientId,
       clientSecret: global.cfg.server.gitHubClientSecret,
-      callbackURL: new URL(`${global.cfg.server.apiPath}auth/callback`, global.cfg.client.apiHost).href,
+      callbackURL: `${global.cfg.common.apiUrl}auth/callback`,
       passReqToCallback: true,
+
     },
-    (req: Request, accessToken: string, refreshToken: string, profile: any, cb: Function) => {
+    function (req: Request,
+              accessToken: string,
+              refreshToken: string,
+              profile: passportGitHub.Profile,
+              cb: OAuth2Strategy.VerifyCallback) {
       req.session.accessToken = accessToken;
       req.session.refreshToken = refreshToken;
 
@@ -63,12 +67,12 @@ router.get('/',
 );
 
 router.get('/callback',
-  passport.authenticate('github', { failureRedirect: '/' }),
-  (req, res) => {
-    console.log(`user: ${req.user}`);
-    console.log(`session: ${req.user}`);
-    res.redirect('/');
-  },
+  passport.authenticate('github',
+  {
+    failureRedirect: global.cfg.common.webUrl,
+    successRedirect: global.cfg.common.webUrl,
+    session: true,
+  })
 );
 
 router.get('/user',
@@ -89,7 +93,7 @@ router.get('/user',
 router.get('/logout',
   (req, res) => {
     req.logOut();
-    res.sendStatus(200);
+    res.redirect(global.cfg.common.webUrl);
   },
 );
 

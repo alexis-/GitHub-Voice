@@ -35,7 +35,7 @@ export default Vue.extend({
   },
   methods: {
     SignInWithGithub(evt) {
-      window.location.href = `${process.env.VUE_APP_API_BASE_URL}auth`;
+      window.location.href = `${process.env.VUE_APP_API_URL}auth`;
     },
   },
 });

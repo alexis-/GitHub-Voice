@@ -23,6 +23,7 @@ module.exports = {
     'no-plusplus': 0,
     'no-unused-vars': 0,
     'no-useless-constructor': 'off',
+    'prefer-destructuring': 0,
     '@typescript-eslint/no-useless-constructor': 'error',
     '@typescript-eslint/no-var-requires': 0,
     'max-len': [

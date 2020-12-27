@@ -14,11 +14,15 @@ jobs:
 
       - name: Install and Build 🔧
         env:
-          GH_VOICE_SRV_API_PATH: ${{ secrets.GH_VOICE_SRV_API_PATH }}
+          GH_VOICE_API_URL: ${{ secrets.GH_VOICE_API_URL }}
+          GH_VOICE_WEB_URL: ${{ secrets.GH_VOICE_WEB_URL }}
 
           GH_VOICE_CLIENT_TITLE: ${{ secrets.GH_VOICE_CLIENT_TITLE }}
-          GH_VOICE_CLIENT_API_HOST: ${{ secrets.GH_VOICE_CLIENT_API_HOST }}
           GH_VOICE_CLIENT_PUBLIC_PATH: ${{ secrets.GH_VOICE_CLIENT_PUBLIC_PATH }}
+          GH_VOICE_CLIENT_SOCIAL_GITHUB: ${{ secrets.GH_VOICE_CLIENT_SOCIAL_GITHUB }}
+          GH_VOICE_CLIENT_SOCIAL_FACEBOOK: ${{ secrets.GH_VOICE_CLIENT_SOCIAL_FACEBOOK }}
+          GH_VOICE_CLIENT_SOCIAL_TWITTER: ${{ secrets.GH_VOICE_CLIENT_SOCIAL_TWITTER }}
+          GH_VOICE_CLIENT_SOCIAL_DISCORD: ${{ secrets.GH_VOICE_CLIENT_SOCIAL_DISCORD }}
         run: |
           npm install
           npm run-script build:client

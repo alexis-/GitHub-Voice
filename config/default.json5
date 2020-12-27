@@ -1,9 +1,14 @@
 {
+  common: {
+    // Url for the API.
+    apiUrl: "http://localhost:3000/",
+
+    // Static website url.
+    webUrl: "http://localhost:8080/",
+  },
+  
   server: {
     port: 3000,
-    
-    // Url prefix path to the api. Use "/" if for hosting the api at the root level of a domain/subdomain
-    apiPath: "api/",
 
     // Whether this node instance should serve both the API and the Vue client's static files (in dist/)
     serveStaticFiles: true,
@@ -34,9 +39,6 @@
     // Vue's public path
     // see: https://cli.vuejs.org/config/#publicpath
     publicPath: "/",
-
-    // Host for the API. Do not include the path (see server.apiPath).
-    apiHost: "http://localhost:8080/",
 
     // Social links
     socialGitHub: "",

@@ -87,10 +87,10 @@ export default Vue.extend({
       return this.$store.getters['auth/isAuthenticated'];
     },
     authSignIn() {
-      return `${process.env.VUE_APP_API_BASE_URL}auth`;
+      return `${process.env.VUE_APP_API_URL}auth`;
     },
     authSignOut() {
-      return `${process.env.VUE_APP_API_BASE_URL}auth/logout`;
+      return `${process.env.VUE_APP_API_URL}auth/logout`;
     },
     socialLinkGitHub() {
       return process.env.VUE_APP_SOCIAL_GIT_HUB;

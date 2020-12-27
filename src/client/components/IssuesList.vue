@@ -78,47 +78,53 @@ export default class IssuesList extends Vue {
     return this.filteredIssues.length;
   }
 
-  voteUpOrDown(issue) {
+  async voteUpOrDown(issue: Issue) {
     if (this.$store.getters['auth/isAuthenticated'] === false) {
       this.$store.commit('TOGGLE_SIGN_IN_MODAL');
       return;
     }
 
-    gitService.getReactions(issue.reactions.url)
-      .then((resp1) => {
-        if (resp1 === undefined || resp1.status !== 200) {
+    try {
+      // 1 - Check existing reactions against cached reaction because GH api doesn't update in real time.
+      let userReaction = issue.userReaction;
+      console.log(`>>> 1. ${userReaction}`);
+
+      // If no reaction was cached, fetch from GH.
+      if (userReaction === null) {
+        const listResp = await gitService.getReactions(issue);
+
+        if (listResp === undefined || listResp.status !== 200) {
           return;
         }
 
-        const reactions = resp1.data;
+        const reactions = listResp.data;
         const user = this.$store.getters['auth/user'];
 
-        // Use cached reaction because: 1) faster 2) GH api doesn't update in real time
-        const userReaction = issue.userReaction == null
-          ? issue.userReaction
-          : reactions.find((r) => r.content === '+1' && r.user.id.toString() === user.id);
+        userReaction = reactions.find((r) => r.content === '+1' && r.user.id.toString() === user.id.toString());
+        console.log(`>>> 2. ${userReaction}`);
+      }
 
-        const apiCall = (userReaction === null || userReaction === undefined)
-          ? gitService.addReaction(issue, '+1')
-          : gitService.delReaction(issue, userReaction.id);
+      // 2 - Either add or delete reaction depending on whether user has previously voted.
+      const updateResp = (userReaction === null || userReaction === undefined)
+        ? await gitService.addReaction(issue, '+1')
+        : await gitService.delReaction(issue, userReaction.id);
 
-        apiCall
-          .then((resp2) => {
-            if (resp2 === undefined || resp2.status >= 400) {
-              return;
-            }
+      if (updateResp === undefined || updateResp.status >= 400) {
+        return;
+      }
 
-            if (userReaction) {
-              issue.reactions['+1']--;
-              issue.userReaction = undefined;
-            } else {
-              issue.reactions['+1']++;
-              issue.userReaction = resp2.data;
-            }
-          })
-          .catch(console.debug);
-      })
-      .catch(console.debug);
+      if (userReaction) {
+        issue.reactions['+1']--;
+        issue.userReaction = undefined;
+        console.log(`>>> 3. ${issue.userReaction}`);
+      } else {
+        issue.reactions['+1']++;
+        issue.userReaction = updateResp.data;
+        console.log(`>>> 4. ${issue.userReaction}`);
+      }
+    } catch (ex) {
+      console.error(ex);
+    }
   }
 }
 </script>

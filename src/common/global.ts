@@ -1,9 +1,19 @@
 export {};
 
 declare global {
+  interface GHConfigCommon {
+    apiUrl: string;
+    webUrl: string;
+    apiOrigin: string;
+    webOrigin: string;
+    apiHost: string;
+    webHost: string;
+    apiPath: string;
+    webPath: string;
+  }
+
   interface GHConfigClient {
     title: string;
-    apiHost: string;
     publicPath: string;
     socialGitHub: string;
     socialFacebook: string;
@@ -13,7 +23,6 @@ declare global {
 
   interface GHConfigServer {
     port: number;
-    apiPath: string;
     serveStaticFiles: boolean;
     cors: boolean | string | Array<string>;
     dataPath: string;
@@ -29,6 +38,7 @@ declare global {
   }
 
   interface GHConfig {
+    common: GHConfigCommon;
     server: GHConfigServer;
     client: GHConfigClient;
     repositories: Array<GHConfigRepository>;

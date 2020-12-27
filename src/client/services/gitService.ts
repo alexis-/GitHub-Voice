@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import Issue from '~/models/issue';
 import Repository from '~/models/cl-repository';
+import Reaction from '~/models/reaction';
 
 const httpClient = axios.create({
   baseURL: 'https://api.github.com',
@@ -11,17 +12,17 @@ const httpClient = axios.create({
 export default {
   httpClient,
   listIssues(repo: Repository) {
-    return httpClient.get(`/repos/${repo.orgAndRepo}/issues`, {
+    return httpClient.get<Array<Issue>>(`/repos/${repo.orgAndRepo}/issues`, {
       headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },
     });
   },
   getReactions(issue: Issue) {
-    return httpClient.get(`/repos/${issue.repo!.orgAndRepo}/issues/${issue.number}/reactions`, {
+    return httpClient.get<Array<Reaction>>(`/repos/${issue.repo!.orgAndRepo}/issues/${issue.number}/reactions`, {
       headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },
     });
   },
   addReaction(issue: Issue, reaction: string) {
-    return httpClient.post(`/repos/${issue.repo!.orgAndRepo}/issues/${issue.number}/reactions`, {
+    return httpClient.post<Reaction>(`/repos/${issue.repo!.orgAndRepo}/issues/${issue.number}/reactions`, {
       content: reaction,
     }, {
       headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },

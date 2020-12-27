@@ -1,7 +1,8 @@
 import { Moment } from 'moment';
 
 import Label from './label';
-import Reactions from './reaction';
+import Reactions from './reactions';
+import Reaction from './reaction';
 import Repository from './cl-repository';
 
 export default class Issue {
@@ -24,6 +25,8 @@ export default class Issue {
   labels: Array<Label>;
   reactions: Reactions;
 
+  // Client-set variables
+  userReaction: Reaction | null | undefined = null;
   repo: Repository | null;
 
   get url(): string {
