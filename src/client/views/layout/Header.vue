@@ -57,8 +57,8 @@
         <li class="nav-item ml-sm-3" v-else>
           <a :href="authSignIn"
              target="_self"
-             class="btn btn-success btn-icon btn-sm">
-            <span class="btn-inner--icon h6 text-white">
+             class="btn btn-signin btn-outline-secondary btn-icon btn-sm">
+            <span class="btn-inner--icon h6">
               <i class="fab fa-github mr-2"></i>
             </span>
             <span class="nav-link-inner--text">Sign In</span>
@@ -125,5 +125,11 @@ export default Vue.extend({
       max-height: 100%;
       border-radius: 50%;
     }
+}
+.btn.btn-signin span {
+  color: white;
+}
+.btn.btn-signin:hover span {
+  color: black;
 }
 </style>
