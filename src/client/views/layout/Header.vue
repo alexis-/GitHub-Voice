@@ -37,9 +37,9 @@
             <span class="nav-link-inner--text d-none">Twitter</span>
           </a>
         </li>
-        <li class="nav-item" v-if="socialLinkGitHub">
+        <li class="nav-item" v-if="socialLinkDiscord">
           <a class="nav-link nav-link-icon"
-             href="https://discord.gg/vUQhqCT"
+             :href="socialLinkDiscord"
              target="_blank"
              data-toggle="tooltip" title="Join our Discord server">
               <i class="fab fa-discord"></i>
