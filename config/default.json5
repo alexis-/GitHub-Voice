@@ -45,6 +45,7 @@
     socialFacebook: "",
     socialTwitter: "",
     socialDiscord: "",
+    socialYouTube: "",
   },
 
   // Which repositories' issues should be displayed to the client.

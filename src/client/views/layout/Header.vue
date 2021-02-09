@@ -46,6 +46,15 @@
               <span class="nav-link-inner--text d-none">Discord</span>
           </a>
         </li>
+        <li class="nav-item" v-if="socialLinkYouTube">
+          <a class="nav-link nav-link-icon"
+             :href="socialLinkYouTube"
+             target="_blank"
+             data-toggle="tooltip" title="Checkout our YouTube channel">
+              <i class="fab fa-youtube"></i>
+              <span class="nav-link-inner--text d-none">YouTube</span>
+          </a>
+        </li>
         <li class="nav-item ml-sm-3" v-if="isLoggedIn">
           <a :href="authSignOut"
              :alt="user.username"
@@ -103,6 +112,9 @@ export default Vue.extend({
     },
     socialLinkDiscord() {
       return process.env.VUE_APP_SOCIAL_DISCORD;
+    },
+    socialLinkYouTube() {
+      return process.env.VUE_APP_SOCIAL_YOU_TUBE;
     },
   },
   data() {
