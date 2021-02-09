@@ -46,6 +46,15 @@
               <span class="nav-link-inner--text d-none">Discord</span>
           </a>
         </li>
+        <li class="nav-item" v-if="socialLinkPatreon">
+          <a class="nav-link nav-link-icon"
+             :href="socialLinkPatreon"
+             target="_blank"
+             data-toggle="tooltip" title="Checkout our Patreon">
+              <i class="fab fa-patreon"></i>
+              <span class="nav-link-inner--text d-none">Patreon</span>
+          </a>
+        </li>
         <li class="nav-item ml-sm-3" v-if="isLoggedIn">
           <a :href="authSignOut"
              :alt="user.username"
@@ -103,6 +112,9 @@ export default Vue.extend({
     },
     socialLinkDiscord() {
       return process.env.VUE_APP_SOCIAL_DISCORD;
+    },
+    socialLinkPatreon() {
+      return process.env.VUE_APP_SOCIAL_PATREON;
     },
   },
   data() {
