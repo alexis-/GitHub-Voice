@@ -45,6 +45,7 @@
     socialFacebook: "",
     socialTwitter: "",
     socialDiscord: "",
+    socialWebsite: "https://google.com",
   },
 
   // Which repositories' issues should be displayed to the client.
